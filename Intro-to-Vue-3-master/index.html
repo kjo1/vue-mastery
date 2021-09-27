@@ -22,13 +22,7 @@
     <div class="product-display">
       <div class="product-container">
         <div class="product-image">
-          <!-- tried on my own with ternary operation but solution is more simple and easy -->
-          <img
-            :src="image"
-            :class="[ !inStock ? 'out-of-stock-img':'' ]"
-          >
-          <!-- from solution -->
-          <!-- :class="{ 'out-of-stock-img': !inStock}" -->
+          <img v-bind:src="image">
         </div>
         <div class="product-info">
           <h1>{{ product }}</h1>
@@ -39,17 +33,17 @@
           </ul>
 
           <div
+            class="color-circle"
             v-for="variant in variants"
             :key="variant.id"
             @mouseover="updateImage(variant.image)"
-            class="color-circle"
-            :style="{backgroundColor: variant.color}"
+            :style="{ backgroundColor: variant.color }"
           ></div>
           <button
             class="button"
             :class="{ disabledButton: !inStock }"
             :disabled="!inStock"
-            @click="addToCart"
+            v-on:click="addToCart"
           >Add to Cart</button>
         </div>
       </div>
